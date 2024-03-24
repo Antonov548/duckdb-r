@@ -1,4 +1,6 @@
 test_that("duckdb_read_csv() works as expected", {
+  skip("RE2")
+
   con <- dbConnect(duckdb())
 
   tf <- tempfile()

@@ -17,7 +17,8 @@
 #' @param ... Passed on to [read.csv()]
 #' @return The number of rows in the resulted table, invisibly.
 #' @export
-#' @examples
+# RE2
+#' @examplesIf FALSE
 #' con <- dbConnect(duckdb())
 #'
 #' data <- data.frame(a = 1:3, b = letters[1:3])
