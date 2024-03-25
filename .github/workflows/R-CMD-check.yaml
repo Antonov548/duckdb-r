@@ -137,12 +137,12 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: 'release'}
-          - {os: windows-latest, r: 'devel'}
-          - {os: windows-latest, r: 'oldrel'}
+          # - {os: windows-latest, r: 'release'}
+          # - {os: windows-latest, r: 'devel'}
+          # - {os: windows-latest, r: 'oldrel'}
           - {os: windows-latest, r: 'oldrel-1'}
-          - {os: windows-latest, r: 'oldrel-2'}
-          - {os: windows-latest, r: 'oldrel-3'}
+          # - {os: windows-latest, r: 'oldrel-2'}
+          # - {os: windows-latest, r: 'oldrel-3'}
 
     steps:
       - uses: actions/checkout@v4
@@ -158,6 +158,9 @@ jobs:
           cache-version: rcc-windows-1
           token: ${{ secrets.GITHUB_TOKEN }}
           needs: check
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
