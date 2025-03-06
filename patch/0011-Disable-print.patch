@@ -1,9 +1,28 @@
+diff --git a/src/duckdb/src/include/duckdb/execution/operator/csv_scanner/csv_state_machine.hpp b/src/duckdb/src/include/duckdb/execution/operator/csv_scanner/csv_state_machine.hpp
+index 71eb1c11e..eca9fec11 100644
+--- a/src/duckdb/src/include/duckdb/execution/operator/csv_scanner/csv_state_machine.hpp
++++ b/src/duckdb/src/include/duckdb/execution/operator/csv_scanner/csv_state_machine.hpp
+@@ -129,12 +129,14 @@ public:
+ 	}
+
+ 	void Print() const {
++#ifndef DUCKDB_DISABLE_PRINT
+ 		std::cout << "State Machine Options" << '\n';
+ 		std::cout << "Delim: " << state_machine_options.delimiter.GetValue() << '\n';
+ 		std::cout << "Quote: " << state_machine_options.quote.GetValue() << '\n';
+ 		std::cout << "Escape: " << state_machine_options.escape.GetValue() << '\n';
+ 		std::cout << "Comment: " << state_machine_options.comment.GetValue() << '\n';
+ 		std::cout << "---------------------" << '\n';
++#endif
+ 	}
+ 	//! The Transition Array is a Finite State Machine
+ 	//! It holds the transitions of all states, on all 256 possible different characters
 diff --git a/src/duckdb/src/logging/log_storage.cpp b/src/duckdb/src/logging/log_storage.cpp
 index 625757490..253db8514 100644
 --- a/src/duckdb/src/logging/log_storage.cpp
 +++ b/src/duckdb/src/logging/log_storage.cpp
 @@ -37,12 +37,14 @@ StdOutLogStorage::~StdOutLogStorage() {
- 
+
  void StdOutLogStorage::WriteLogEntry(timestamp_t timestamp, LogLevel level, const string &log_type,
                                       const string &log_message, const RegisteredLoggingContext &context) {
 +#ifndef DUCKDB_DISABLE_PRINT
@@ -15,5 +34,5 @@ index 625757490..253db8514 100644
  	    context.context.thread_id.IsValid() ? to_string(context.context.thread_id.GetIndex()) : "NULL");
 +#endif
  }
- 
+
  void StdOutLogStorage::WriteLogEntries(DataChunk &chunk, const RegisteredLoggingContext &context) {
